@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,64 @@ namespace WPFApp
     /// </summary>
     public partial class MainWindow : Window
     {
+       
+
+
+        
+
+
         public MainWindow()
         {
             InitializeComponent();
+
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+
+            
         }
+
+
+        
+
+
+
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+
+
+        }
+
+        private void btn_uc_Click(object sender, RoutedEventArgs e)
+        {
+
+            SignUp sup = new SignUp();
+            sup.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+            sup.ShowDialog();
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
     }
 }
