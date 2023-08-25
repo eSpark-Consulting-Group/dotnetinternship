@@ -20,6 +20,74 @@
             Background="#FF5B40A7"
             LastChildFill="False" />
 
+        <Button
+            Width="21"
+            Margin="424,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Button_Click"
+            Content="X" />
+
+
+
+        <TextBox
+            x:Name="NameBox"
+            Width="167"
+            Margin="142,73,141,333"
+            Style="{StaticResource WaterMarkTextBox}" />
+
+
+        <TextBox
+            x:Name="EmailBox"
+            Margin="142,145,141,261"
+            Style="{StaticResource WaterMarkEmailBox}" />
+
+
+        <PasswordBox
+            x:Name="passbox"
+            Width="167"
+            Margin="142,215,141,191"
+            KeyDown="pass_KeyDown"
+            Style="{StaticResource WaterMarkPasswordBox}" />
+
+
+
+        <PasswordBox
+            x:Name="confirm_passbox"
+            Width="167"
+            Margin="142,283,141,123"
+            Style="{StaticResource WaterMarkConfirmPasswordBox}">
+
+            <!--
+             <PasswordBox.ToolTip>
+                <TextBlock FontSize="15" Text="confirm password" />
+            </PasswordBox.ToolTip>
+            -->
+
+        </PasswordBox>
+
+
+
+        <Button
+            x:Name="btn_go"
+            Width="86"
+            Height="46"
+            Margin="0,356,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Click="btn_go_Click"
+            Content="GO"
+            FontFamily="Arial Black"
+            FontSize="20"
+            FontWeight="Bold">
+            <Button.Background>
+                <RadialGradientBrush>
+                    <GradientStop Offset="1" Color="#FF2B94AF" />
+                    <GradientStop Offset="0" Color="#FF39C4E8" />
+                </RadialGradientBrush>
+            </Button.Background>
+        </Button>
+
 
         <Popup Name="myPopup">
             <TextBlock
@@ -35,6 +103,38 @@
             Margin="0,418,0,-6"
             Background="#FF5B40A7"
             LastChildFill="False" />
+
+
+        <Label
+            x:Name="signup_fields_info_1"
+            Margin="142,186,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Label" />
+
+
+        <Label
+            x:Name="signup_fields_info_2"
+            Margin="142,113,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Label" />
+
+
+        <Label
+            x:Name="signup_fields_info_3"
+            Margin="142,255,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Label" />
+
+
+        <Label
+            x:Name="signup_fields_info_4"
+            Margin="142,322,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Label" />
 
 
     </Grid>

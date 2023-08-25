@@ -6,7 +6,410 @@
     xmlns:local="clr-namespace:WPFApp"
     StartupUri="MainWindow.xaml">
 
-    <Application.Resources />
+    <Application.Resources>
+
+        <!--  Email Box Style  -->
+
+        <Style x:Key="WaterMarkEmailBox" TargetType="{x:Type TextBox}">
+            <Setter Property="local:WaterMarkTextHelper.IsMonitoring" Value="True" />
+            <Setter Property="local:WaterMarkTextHelper.WatermarkText" Value="Email" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="enterGotFocus">
+                                <DoubleAnimation
+                                    Storyboard.TargetName="Message"
+                                    Storyboard.TargetProperty="Opacity"
+                                    To=".2"
+                                    Duration="0:0:0.4" />
+                            </Storyboard>
+                            <Storyboard x:Key="exitGotFocus">
+                                <DoubleAnimation
+                                    Storyboard.TargetName="Message"
+                                    Storyboard.TargetProperty="Opacity"
+                                    Duration="0:0:0.4" />
+                            </Storyboard>
+
+                            <Storyboard x:Key="enterHasText">
+                                <DoubleAnimation
+                                    Storyboard.TargetName="Message"
+                                    Storyboard.TargetProperty="Opacity"
+                                    From=".2"
+                                    To="0"
+                                    Duration="0:0:0.4" />
+                            </Storyboard>
+                            <Storyboard x:Key="exitHasText">
+                                <DoubleAnimation
+                                    Storyboard.TargetName="Message"
+                                    Storyboard.TargetProperty="Opacity"
+                                    Duration="0:0:0.4" />
+                            </Storyboard>
+                        </ControlTemplate.Resources>
+                        <Border
+                            Name="Bd"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <ScrollViewer
+                                    x:Name="PART_ContentHost"
+                                    Margin="1"
+                                    VerticalAlignment="Center" />
+                                <TextBlock
+                                    x:Name="Message"
+                                    Margin="6,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontFamily="Calibri"
+                                    FontStyle="Italic"
+                                    Foreground="Gray"
+                                    IsHitTestVisible="False"
+                                    Opacity="1.5"
+                                    Text="{TemplateBinding local:WaterMarkTextHelper.WatermarkText}" />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="local:WaterMarkTextHelper.HasText" Value="False" />
+                                    <Condition Property="IsFocused" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource enterGotFocus}" />
+                                </MultiTrigger.EnterActions>
+                                <MultiTrigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource exitGotFocus}" />
+                                </MultiTrigger.ExitActions>
+                            </MultiTrigger>
+
+                            <Trigger Property="local:WaterMarkTextHelper.HasText" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource enterHasText}" />
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource exitHasText}" />
+                                </Trigger.ExitActions>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--  ***************************************************************************************************************  -->
+
+
+
+        <!--  TextBox Style  -->
+
+        <Style x:Key="WaterMarkTextBox" TargetType="{x:Type TextBox}">
+            <Setter Property="local:WaterMarkTextHelper.IsMonitoring" Value="True" />
+            <Setter Property="local:WaterMarkTextHelper.WatermarkText" Value="Username" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="enterGotFocus">
+                                <DoubleAnimation
+                                    Storyboard.TargetName="Message"
+                                    Storyboard.TargetProperty="Opacity"
+                                    To=".2"
+                                    Duration="0:0:0.4" />
+                            </Storyboard>
+                            <Storyboard x:Key="exitGotFocus">
+                                <DoubleAnimation
+                                    Storyboard.TargetName="Message"
+                                    Storyboard.TargetProperty="Opacity"
+                                    Duration="0:0:0.4" />
+                            </Storyboard>
+
+                            <Storyboard x:Key="enterHasText">
+                                <DoubleAnimation
+                                    Storyboard.TargetName="Message"
+                                    Storyboard.TargetProperty="Opacity"
+                                    From=".2"
+                                    To="0"
+                                    Duration="0:0:0.4" />
+                            </Storyboard>
+                            <Storyboard x:Key="exitHasText">
+                                <DoubleAnimation
+                                    Storyboard.TargetName="Message"
+                                    Storyboard.TargetProperty="Opacity"
+                                    Duration="0:0:0.4" />
+                            </Storyboard>
+                        </ControlTemplate.Resources>
+                        <Border
+                            Name="Bd"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <ScrollViewer
+                                    x:Name="PART_ContentHost"
+                                    Margin="1"
+                                    VerticalAlignment="Center" />
+                                <TextBlock
+                                    x:Name="Message"
+                                    Margin="6,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontFamily="Calibri"
+                                    FontStyle="Italic"
+                                    Foreground="Gray"
+                                    IsHitTestVisible="False"
+                                    Opacity="1.5"
+                                    Text="{TemplateBinding local:WaterMarkTextHelper.WatermarkText}" />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="local:WaterMarkTextHelper.HasText" Value="False" />
+                                    <Condition Property="IsFocused" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource enterGotFocus}" />
+                                </MultiTrigger.EnterActions>
+                                <MultiTrigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource exitGotFocus}" />
+                                </MultiTrigger.ExitActions>
+                            </MultiTrigger>
+
+                            <Trigger Property="local:WaterMarkTextHelper.HasText" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource enterHasText}" />
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource exitHasText}" />
+                                </Trigger.ExitActions>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <!--  PasswordBox Style  -->
+
+        <Style x:Key="WaterMarkPasswordBox" TargetType="{x:Type PasswordBox}">
+            <Setter Property="local:WaterMarkTextHelper.IsMonitoring" Value="True" />
+            <Setter Property="local:WaterMarkTextHelper.WatermarkText" Value="Password" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type PasswordBox}">
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="enterGotFocus">
+                                <DoubleAnimation
+                                    Storyboard.TargetName="Message"
+                                    Storyboard.TargetProperty="Opacity"
+                                    To=".2"
+                                    Duration="0:0:0.4" />
+                            </Storyboard>
+                            <Storyboard x:Key="exitGotFocus">
+                                <DoubleAnimation
+                                    Storyboard.TargetName="Message"
+                                    Storyboard.TargetProperty="Opacity"
+                                    Duration="0:0:0.4" />
+                            </Storyboard>
+
+                            <Storyboard x:Key="enterHasText">
+                                <DoubleAnimation
+                                    Storyboard.TargetName="Message"
+                                    Storyboard.TargetProperty="Opacity"
+                                    From=".2"
+                                    To="0"
+                                    Duration="0:0:0.4" />
+                            </Storyboard>
+                            <Storyboard x:Key="exitHasText">
+                                <DoubleAnimation
+                                    Storyboard.TargetName="Message"
+                                    Storyboard.TargetProperty="Opacity"
+                                    Duration="0:0:0.4" />
+                            </Storyboard>
+                        </ControlTemplate.Resources>
+                        <Border
+                            Name="Bd"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <ScrollViewer
+                                    x:Name="PART_ContentHost"
+                                    Margin="1"
+                                    VerticalAlignment="Center" />
+                                <TextBlock
+                                    x:Name="Message"
+                                    Margin="6,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontFamily="Calibri"
+                                    FontStyle="Italic"
+                                    Foreground="Gray"
+                                    IsHitTestVisible="False"
+                                    Opacity="1.5"
+                                    Text="{TemplateBinding local:WaterMarkTextHelper.WatermarkText}" />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="True">
+                                <Setter TargetName="Bd" Property="Opacity" Value="1" />
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="local:WaterMarkTextHelper.HasText" Value="False" />
+                                    <Condition Property="IsFocused" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource enterGotFocus}" />
+                                </MultiTrigger.EnterActions>
+                                <MultiTrigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource exitGotFocus}" />
+                                </MultiTrigger.ExitActions>
+                            </MultiTrigger>
+
+                            <Trigger Property="local:WaterMarkTextHelper.HasText" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource enterHasText}" />
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource exitHasText}" />
+                                </Trigger.ExitActions>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+        <!--  Confirm PasswordBox Style  -->
+
+        <Style x:Key="WaterMarkConfirmPasswordBox" TargetType="{x:Type PasswordBox}">
+            <Setter Property="local:WaterMarkTextHelper.IsMonitoring" Value="True" />
+            <Setter Property="local:WaterMarkTextHelper.WatermarkText" Value="Confirm Password" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type PasswordBox}">
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="enterGotFocus">
+                                <DoubleAnimation
+                                    Storyboard.TargetName="Message"
+                                    Storyboard.TargetProperty="Opacity"
+                                    To=".2"
+                                    Duration="0:0:0.4" />
+                            </Storyboard>
+                            <Storyboard x:Key="exitGotFocus">
+                                <DoubleAnimation
+                                    Storyboard.TargetName="Message"
+                                    Storyboard.TargetProperty="Opacity"
+                                    Duration="0:0:0.4" />
+                            </Storyboard>
+
+                            <Storyboard x:Key="enterHasText">
+                                <DoubleAnimation
+                                    Storyboard.TargetName="Message"
+                                    Storyboard.TargetProperty="Opacity"
+                                    From=".2"
+                                    To="0"
+                                    Duration="0:0:0.4" />
+                            </Storyboard>
+                            <Storyboard x:Key="exitHasText">
+                                <DoubleAnimation
+                                    Storyboard.TargetName="Message"
+                                    Storyboard.TargetProperty="Opacity"
+                                    Duration="0:0:0.4" />
+                            </Storyboard>
+                        </ControlTemplate.Resources>
+                        <Border
+                            Name="Bd"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <ScrollViewer
+                                    x:Name="PART_ContentHost"
+                                    Margin="1"
+                                    VerticalAlignment="Center" />
+                                <TextBlock
+                                    x:Name="Message"
+                                    Margin="6,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontFamily="Calibri"
+                                    FontStyle="Italic"
+                                    Foreground="Gray"
+                                    IsHitTestVisible="False"
+                                    Opacity="1.5"
+                                    Text="{TemplateBinding local:WaterMarkTextHelper.WatermarkText}" />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="True">
+                                <Setter TargetName="Bd" Property="Opacity" Value="1" />
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="local:WaterMarkTextHelper.HasText" Value="False" />
+                                    <Condition Property="IsFocused" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource enterGotFocus}" />
+                                </MultiTrigger.EnterActions>
+                                <MultiTrigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource exitGotFocus}" />
+                                </MultiTrigger.ExitActions>
+                            </MultiTrigger>
+
+                            <Trigger Property="local:WaterMarkTextHelper.HasText" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource enterHasText}" />
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource exitHasText}" />
+                                </Trigger.ExitActions>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+
+
+
+
+
+
+
+
+    </Application.Resources>
 
 </Application>
 
