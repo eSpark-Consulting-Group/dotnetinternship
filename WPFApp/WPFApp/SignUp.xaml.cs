@@ -5,6 +5,7 @@ using System.Windows.Media;
 using System.IO;
 using WPFApp;
 using System.Text.RegularExpressions;
+using System.Security.Cryptography;
 
 namespace WPFApp
 {
@@ -14,7 +15,27 @@ namespace WPFApp
     public partial class SignUp : Window
     {
 
+        static byte[] Encrypt(string simpletext, byte[] key, byte[] iv)
+        {
+            byte[] cipheredtext;
+            using (Aes aes = Aes.Create())
+            {
+                ICryptoTransform encryptor = aes.CreateEncryptor(key, iv);
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    using (CryptoStream cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
+                    {
+                        using (StreamWriter streamWriter = new StreamWriter(cryptoStream))
+                        {
+                            streamWriter.Write(simpletext);
+                        }
 
+                        cipheredtext = memoryStream.ToArray();
+                    }
+                }
+            }
+            return cipheredtext;
+        }
 
         public SignUp()
         {
@@ -157,6 +178,52 @@ namespace WPFApp
                     MessageBox.Show("Welcome " + NameBox.Text, "Greetings", button: MessageBoxButton.OK, icon: MessageBoxImage.Information);
                     this.Close();
 
+
+
+
+                    //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+                    // code for password encryption
+
+                    byte[] key = new byte[16];
+
+                    byte[] iv = new byte[16];
+
+                    using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+                    {
+                        rng.GetBytes(key);
+                        rng.GetBytes(iv);
+                    }
+
+                    //Encrypt the password
+                    byte[] encryptedPassword = Encrypt(passbox.Password, key, iv);
+                    string encryptedPasswordString = Convert.ToBase64String(encryptedPassword);
+
+
+
+
+                    //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+
+
+
+                    // Create a User object and add it to the data grid
+                    UserInfo newUser = new UserInfo { UserName = NameBox.Text, UserEmail = EmailBox.Text, UserPassword = encryptedPasswordString };
+
+
+                    if (Application.Current.MainWindow is MainWindow mainWindow)
+                    {
+                        mainWindow.AddUserToDataGrid(newUser);
+
+                        MainWindow mw = new MainWindow();
+                        //mw.UpdateRowCount();
+
+                    }
+
+                    
+
+                    
 
                 }
 
