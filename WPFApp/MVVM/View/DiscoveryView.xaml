@@ -1,0 +1,137 @@
+﻿<UserControl
+    x:Class="ModernDesign.MVVM.View.DiscoveryView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ModernDesign.MVVM.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Background="#FF21212D"
+    mc:Ignorable="d">
+
+
+
+    <StackPanel>
+
+        <StackPanel.Resources>
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="Margin" Value="25,0,0,0" />
+
+            </Style>
+        </StackPanel.Resources>
+
+
+        <TextBlock
+            Margin="30,15,0,10"
+            HorizontalAlignment="Left"
+            FontFamily="/Fonts/#Ubuntu"
+            FontSize="25"
+            FontWeight="Bold"
+            Foreground="White"
+            Text="Sports" />
+
+        <StackPanel Width="676" Orientation="Horizontal">
+
+            <Border
+                Width="150"
+                Height="150"
+                Margin="0"
+                Background="#844eff"
+                CornerRadius="10">
+                <Image Margin="-4,22,-4,22" Source="/Images/s1.PNG" />
+            </Border>
+
+
+            <Border
+                Width="150"
+                Height="150"
+                Background="#FF58DC6D"
+                CornerRadius="10">
+                <Image Margin="-4,22,-4,22" Source="/Images/s2.PNG" />
+
+            </Border>
+
+
+            <Border
+                Width="150"
+                Height="150"
+                Background="#FFE86DD8"
+                CornerRadius="10">
+                <Image Margin="-4,22,-4,22" Source="/Images/s3.PNG" />
+
+            </Border>
+
+
+            <Border
+                Width="150"
+                Height="150"
+                Background="#FFF6FF4E"
+                CornerRadius="10">
+                <Image Margin="-4,22,-4,22" Source="/Images/s4.PNG" />
+
+            </Border>
+
+
+
+        </StackPanel>
+
+        <TextBlock
+            Margin="30,15,0,10"
+            HorizontalAlignment="Left"
+            FontFamily="/Fonts/#Ubuntu"
+            FontSize="25"
+            FontWeight="Bold"
+            Foreground="White"
+            Text="Movies" />
+
+        <StackPanel Width="676" Orientation="Horizontal">
+
+            <Border
+                Width="150"
+                Height="150"
+                Margin="0"
+                Background="#FF3453CC"
+                CornerRadius="10">
+                <Image Margin="-14,11,-14,11" Source="/Images/m1.PNG" />
+
+            </Border>
+
+
+            <Border
+                Width="150"
+                Height="150"
+                Background="#FFE8C54B"
+                CornerRadius="10">
+                <Image Margin="-14,11,-14,11" Source="/Images/m2.PNG" />
+
+            </Border>
+
+
+            <Border
+                Width="150"
+                Height="150"
+                Background="#FF65C5CC"
+                CornerRadius="10">
+                <Image Margin="-14,11,-14,11" Source="/Images/m3.PNG" />
+
+            </Border>
+
+
+            <Border
+                Width="150"
+                Height="150"
+                Background="#FFFD4747"
+                CornerRadius="10">
+                <Image Margin="-10,19,-18,3" Source="/Images/m4.PNG" />
+
+            </Border>
+
+
+
+
+        </StackPanel>
+
+
+    </StackPanel>
+</UserControl>
